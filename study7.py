@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import numpy as np
+import pandas as pd
 import csv
 
 #폰트 설정
@@ -28,17 +29,16 @@ for row in data:
 for row2 in data2: 
     b.append(row2[1].replace(",",""))
 
-#numpy 변환
-first=np.array(a, dtype="int16")
-second=np.array(b, dtype="int16")
+#pandas 변환
+first = pd.DataFrame(a,index=bars,dtype="int16")
+second = pd.DataFrame(b,index=bars,dtype="int16")
+result = first[0] - second[0]
 
-result = first - second
-x_pos = np.arange(len(result))
 #파일 닫기
 f.close()
 f2.close()
 
 #그래프 그리기
-plt.bar(x_pos,result)
-plt.xticks(x_pos,bars,rotation='vertical')
+plt.bar(result.index,result)
+plt.xticks(rotation='vertical')
 plt.show()
