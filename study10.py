@@ -28,12 +28,8 @@ tennis_data
 
 X = np.array(pd.DataFrame(tennis_data, columns = ['Outlook', 'Temperature', 'Humidity', 'Wind']))
 y = np.array(pd.DataFrame(tennis_data, columns = ['PlayTennis']))
-print(X)
-print(y)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y)
-print(X_train)
-print(X_test)
 # 분석 시작
 dt_clf = DecisionTreeClassifier()
 dt_clf = dt_clf.fit(X_train, y_train) # 데이터 학습
@@ -45,7 +41,6 @@ print(classification_report(y_test, dt_prediction)) # 결과
 feature_names = tennis_data.columns.tolist() # ['Outlook', 'Temperature', 'Humidity', 'Wind', 'PlayTennis']
 feature_names = feature_names[0:4] # ['Outlook', 'Temperature', 'Humidity', 'Wind']
 target_name = np.array(['Play No', 'Play Yes'])
-os.environ['PATH'] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
 dt_dot_data = tree.export_graphviz(dt_clf, out_file = None, 
                                    feature_names = feature_names,
                                    class_names = target_name,
