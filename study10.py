@@ -3,7 +3,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn import tree
 
-from IPython.display import Image
+from IPython.display import display,Image
+from io import StringIO
 
 import pandas as pd
 import numpy as np
@@ -29,6 +30,7 @@ tennis_data
 X = np.array(pd.DataFrame(tennis_data, columns = ['Outlook', 'Temperature', 'Humidity', 'Wind']))
 y = np.array(pd.DataFrame(tennis_data, columns = ['PlayTennis']))
 
+
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 # 분석 시작
 dt_clf = DecisionTreeClassifier()
@@ -47,4 +49,4 @@ dt_dot_data = tree.export_graphviz(dt_clf, out_file = None,
                                    filled = True, rounded = True,
                                    special_characters = True)
 dt_graph = pydotplus.graph_from_dot_data(dt_dot_data)
-Image(dt_graph.create_png())
+img = Image(dt_graph.create_png())
