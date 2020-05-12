@@ -5,6 +5,8 @@ from sklearn.preprocessing import OneHotEncoder
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
+import numpy as np
+from sklearn.metrics import classification_report, confusion_matrix
 
 iris_data = load_iris() # load the iris dataset
 print('Example data: ')
@@ -35,3 +37,6 @@ model.fit(train_x, train_y, verbose=2, batch_size=5, epochs=200)
 results = model.evaluate(test_x, test_y)
 print('Final test set loss: {:4f}'.format(results[0]))
 print('Final test set accuracy: {:4f}'.format(results[1]))
+predict=model.predict_classes(test_x)
+x_test=np.argmax(test_y,axis=1)
+print(confusion_matrix(x_test,predict))
